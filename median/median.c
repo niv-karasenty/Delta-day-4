@@ -9,7 +9,7 @@ int main() {
     int capacity = 10;
 
     // Initializing numbers array of 10 (trash value)
-    ptr = (int *)malloc(capacity*sizeof(int));
+    ptr = (int *)calloc(capacity, sizeof(int));
     if (ptr == NULL) {
         printf("Error allocating memory for int");
         free(ptr);
