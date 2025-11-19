@@ -1,11 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void bubble_sort(int *ptr, int count) {
+    int i, j, temp;
+    for (i = 0; i < count; i++) {
+        for (j = 0; j < count-i-1; j++) {
+            if (ptr[j] > ptr[j+1]) {
+                temp = ptr[j];
+                ptr[j] = ptr[j+1];
+                ptr[j+1] = temp;
+            }
+        }
+    }
+}
+
+// Printing all the array
 void print_all(int *ptr, int count) {
     if (count == 0) {
         printf("No numbers inserted\n");
     }
     else {
+        bubble_sort(ptr, count);
         // Printing all the numbers
         for (int i = 0; i < count; i++) {
             printf("%d ", ptr[i]);
