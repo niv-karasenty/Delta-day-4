@@ -1,10 +1,17 @@
+/*
+ * General program: inputing numbers until another letter is typed using a while loop then if the count is bigger then the memory we have allocated
+ * we reallocate the memory with 2 times the space, then we sort the array using bubble sort and print it sorted and it's median
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
+// Sorting an array
 void bubble_sort(int *ptr, int count) {
-    int i, j, temp;
-    for (i = 0; i < count; i++) {
-        for (j = 0; j < count-i-1; j++) {
+    int temp;
+    for (int i = 0; i < count; i++) {
+        for (int j = 0; j < count-i-1; j++) {
             if (ptr[j] > ptr[j+1]) {
                 temp = ptr[j];
                 ptr[j] = ptr[j+1];
