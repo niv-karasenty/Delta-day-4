@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main() {
-    int *ptr = NULL;
-    int *help_ptr = ptr;
-    int input;
-    int count = 0;
-    int capacity = 10;
-
-    // Initializing numbers array of 10 (trash value)
-    ptr = (int *)calloc(capacity, sizeof(int));
-    if (ptr == NULL) {
-        printf("Error allocating memory for int");
-        free(ptr);
-        exit(EXIT_FAILURE);
+void print_all(int *ptr, int count) {
+    if (count == 0) {
+        printf("No numbers inserted\n");
     }
+    else {
+        // Printing all the numbers
+        for (int i = 0; i < count; i++) {
+            printf("%d ", ptr[i]);
+        }
+        // Printing the median value
+        printf("\nthe median number is: %d", ptr[count/2]);
+    }
+}
+
+int input_from_user(int *ptr, int capacity) {
+    int input;
+    int *help_ptr = ptr;
+    int count = 0;
 
     printf("write some numbers: ");
     // Trying to take another input everytime
@@ -36,17 +40,26 @@ int main() {
         count++;
     }
 
-    // Printing all the numbers
-    for (int i = 0; i < count; i++) {
-        printf("%d ", ptr[i]);
+    return count;
+}
+
+int main() {
+    int *ptr = NULL;
+    int capacity = 10, count;
+
+    // Initializing numbers array of 10 (trash value)
+    ptr = (int *)calloc(capacity, sizeof(int));
+    if (ptr == NULL) {
+        printf("Error allocating memory for int");
+        free(ptr);
+        exit(EXIT_FAILURE);
     }
 
-    // Printing the median value
-    printf("\nthe median number is: %d", ptr[count/2]);
+    count = input_from_user(ptr, capacity);
+    print_all(ptr, count);
 
     // Freeing all the memory we have used
     free(ptr);
-    free(help_ptr);
 
     exit(EXIT_SUCCESS);
 }
