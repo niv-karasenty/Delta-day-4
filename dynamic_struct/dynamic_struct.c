@@ -15,7 +15,7 @@ typedef struct time_in_day {
 int input_from_user(struct time_in_day *input) {
     unsigned int seconds, minutes, hours;
     printf("Enter time in day in the format hh:mm:ss: \n");
-    if (scanf("%d:%d:%d", &hours, &minutes, &seconds) == 0) {
+    if (scanf("%d:%d:%d", &hours, &minutes, &seconds) != 3) {
         return 1;
     }
     if (seconds < SECONDS_MAX && minutes < MINUTES_MAX && hours < HOURS_MAX) {
