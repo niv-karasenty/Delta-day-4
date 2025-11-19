@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define MAX_LINE_LENGTH (255) // arbitrary number of letters in a line
 
 /*------------------------------------------------------
 * Function Name - open_file
@@ -176,16 +175,26 @@ void print_file_properties(char *file_name) {
 
 // Deleting a certain row from a file
 void delete_row(char *filename, int row) {
-    char line[MAX_LINE_LENGTH];
+    char c;
+    int delete = 0;
     FILE *fp = open_file(filename, "r");
     FILE *temp = open_file("temp.txt", "w");
     int current_line = 1;
 
-    while (fgets(line, sizeof(line), fp) != NULL) {
+    while ((c = fgetc(fp)) != EOF) {
         if (current_line == row) {
-            fprintf(temp, "%s", line);
+            delete = 1;
         }
-        current_line++;
+        else {
+            delete = 0;
+        }
+        if (delete == 0) {
+            fputc(c, temp);
+            if (current_line == row) {
+                delete = 1;
+            }
+        }
+        if (c == '\n') current_line++;
     }
 
     // Closing both files
